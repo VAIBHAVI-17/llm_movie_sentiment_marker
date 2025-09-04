@@ -22,3 +22,6 @@ Thumbs.db
 
 # Ignore cache JSON files
 *.json
+
+#Ignore devcontainer
+devcontainer/
