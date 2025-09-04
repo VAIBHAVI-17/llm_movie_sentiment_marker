@@ -1,0 +1,5 @@
+ streamlit
+ tqdm
+ google-generativeai
+ jsonschema
+ python-dotenv
