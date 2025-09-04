@@ -14,15 +14,24 @@ import os
 import json
 import re
 from typing import Any, Dict, List, Optional
+import streamlit as st
 
 from dotenv import load_dotenv
 import google.generativeai as genai
 
 # ---------- Setup ----------
 load_dotenv()
+
 API_KEY = os.getenv("GEMINI_API_KEY")
+try:
+    API_KEY = API_KEY or st.secrets["GEMINI_API_KEY"]
+except Exception:
+    pass  # st.secrets won't exist locally
+
 if not API_KEY:
-    raise RuntimeError("GEMINI_API_KEY not found. Put it in your .env as GEMINI_API_KEY=...")
+    raise RuntimeError(
+        "GEMINI_API_KEY not found. Put it in .env locally or Streamlit Secrets on cloud"
+    )
 
 genai.configure(api_key=API_KEY)
 MODEL_NAME = "gemini-2.5-flash-lite"
